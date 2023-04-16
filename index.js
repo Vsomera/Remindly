@@ -1,4 +1,5 @@
 const express = require("express");
+const session = require("express-session");
 const app = express();
 const path = require("path");
 const ejsLayouts = require("express-ejs-layouts");
@@ -6,12 +7,40 @@ const reminderController = require("./controller/reminder_controller");
 const authController = require("./controller/auth_controller");
 
 app.use(express.static(path.join(__dirname, "public")));
-
 app.use(express.urlencoded({ extended: false }));
-
 app.use(ejsLayouts);
-
 app.set("view engine", "ejs");
+
+app.use(
+  session({           // session is default configured by node docs
+    secret: "secret", // makes cookie stored in the browser digitally signed
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: false,
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+  })
+);
+
+// Initializes passport.js
+const passport = require("./middleware/passport")
+app.use(passport.initialize())
+app.use(passport.session())
+
+// Session Details
+app.use((req, res, next) => {
+    console.log("User details are:" );
+    console.log(req.user);
+
+    console.log("Entire session object:");
+    console.log(req.session);
+
+    console.log("Session details are:" );
+    console.log(req.session.passport);
+    next();
+});
 
 // Routes start here
 

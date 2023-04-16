@@ -41,11 +41,34 @@ let remindersController = {
   },
 
   update: (req, res) => {
-    // implement this code
+    // gets the id of the reminder from endpoint
+    const id = req.params.id;
+
+    // returns the reminder from database that matches the id and updates it accordingly
+    database.cindy.reminders.find((reminder) => {
+      if (reminder.id == id) {
+        reminder.title = req.body.title;
+        reminder.description = req.body.description;
+        reminder.completed = req.body.completed === "true";
+      }
+    });
+
+    // redirects to reminders page
+    res.redirect("/reminders");
   },
 
   delete: (req, res) => {
-    // Implement this code
+    // gets the id of the reminder from endpoint
+    const id = req.params.id;
+
+    // filters reminder from database if id matches
+    const newReminders = database.cindy.reminders.filter(
+      (reminder) => reminder.id != id
+    );
+
+    // overwrites database with the new reminders array
+    database.cindy.reminders = newReminders;
+    res.redirect("/reminders");
   },
 };
 

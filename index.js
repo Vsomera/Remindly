@@ -32,9 +32,13 @@ app.post("/reminder/update/:id", reminderController.update);
 app.post("/reminder/delete/:id", reminderController.delete);
 
 // Fix this to work with passport! The registration does not need to work, you can use the fake database for this.
+
+// Register Routes
 app.get("/register", authController.register);
-app.get("/login", authController.login);
 app.post("/register", authController.registerSubmit);
+
+// Login Routes
+app.get("/login", authController.login);
 app.post("/login", authController.loginSubmit);
 
 app.listen(3001, function () {

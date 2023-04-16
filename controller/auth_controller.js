@@ -10,7 +10,8 @@ let authController = {
   },
 
   loginSubmit: (req, res) => {
-    // implement
+    console.log(req.body)
+    res.send("POST request received, check console")
   },
 
   registerSubmit: (req, res) => {

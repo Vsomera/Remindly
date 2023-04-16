@@ -5,7 +5,9 @@ let remindersController = {
   list: [
     ensureAuthenticated,
     (req, res) => {
-      res.render("reminder/index", { reminders: database.cindy.reminders });
+      const username = req.user.name
+      const userReminders = database[username].reminders
+      res.render("reminder/index", { reminders: userReminders });
     }
   ],
 
@@ -19,14 +21,15 @@ let remindersController = {
   listOne: [
     ensureAuthenticated,
     (req, res) => {
+      const username = req.user.name
       let reminderToFind = req.params.id;
-      let searchResult = database.cindy.reminders.find(function (reminder) {
+      let searchResult = database[username].reminders.find(function (reminder) {
         return reminder.id == reminderToFind;
       });
       if (searchResult != undefined) {
         res.render("reminder/single-reminder", { reminderItem: searchResult });
       } else {
-        res.render("reminder/index", { reminders: database.cindy.reminders });
+        res.render("reminder/index", { reminders: database[username].reminders });
       }
     }
   ],
@@ -34,13 +37,14 @@ let remindersController = {
   create: [
     ensureAuthenticated,
     (req, res) => {
+      const username = req.user.name
       let reminder = {
-        id: database.cindy.reminders.length + 1,
+        id: database[username].reminders.length + 1,
         title: req.body.title,
         description: req.body.description,
         completed: false,
       };
-      database.cindy.reminders.push(reminder);
+      database[username].reminders.push(reminder);
       res.redirect("/reminders");
     }
   ],
@@ -48,8 +52,10 @@ let remindersController = {
   edit: [
     ensureAuthenticated,
     (req, res) => {
+      const username = req.user.name
+
       let reminderToFind = req.params.id;
-      let searchResult = database.cindy.reminders.find(function (reminder) {
+      let searchResult = database[username].reminders.find(function (reminder) {
         return reminder.id == reminderToFind;
       });
       res.render("reminder/edit", { reminderItem: searchResult });
@@ -61,9 +67,10 @@ let remindersController = {
     (req, res) => {
       // gets the id of the reminder from endpoint
       const id = req.params.id;
+      const username = req.user.name
 
       // returns the reminder from database that matches the id and updates it accordingly
-      database.cindy.reminders.find((reminder) => {
+      database[username].reminders.find((reminder) => {
         if (reminder.id == id) {
           reminder.title = req.body.title;
           reminder.description = req.body.description;
@@ -79,16 +86,17 @@ let remindersController = {
   delete: [
     ensureAuthenticated,
     (req, res) => {
+      const username = req.user.name
       // gets the id of the reminder from endpoint
       const id = req.params.id;
 
       // filters reminder from database if id matches
-      const newReminders = database.cindy.reminders.filter(
+      const newReminders = database[username].reminders.filter(
         (reminder) => reminder.id != id
       );
 
       // overwrites database with the new reminders array
-      database.cindy.reminders = newReminders;
+      database[username].reminders = newReminders;
       res.redirect("/reminders");
     }
   ],

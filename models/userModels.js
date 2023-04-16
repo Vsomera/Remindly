@@ -1,19 +1,19 @@
 const userLogin = [
     {
       id: 1,
-      name: "Cindy Lao",
+      name: "cindy",
       email: "cindy123@gmail.com",
       password: "cindy123!",
     },
     {
       id: 2,
-      name: "Alex Doe",
+      name: "alex",
       email: "alex123@gmail.com",
       password: "alex123!",
     },
     {
       id: 3,
-      name: "Jonathan Chen",
+      name: "johnathan",
       email: "jonathan123@gmail.com",
       password: "jonathan123!",
     },

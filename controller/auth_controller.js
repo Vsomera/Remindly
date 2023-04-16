@@ -1,12 +1,16 @@
 const passport = require("../middleware/passport")
+const { forwardAuthenticated } = require("../middleware/checkAuth")
  
 let authController = {
   login: (req, res) => {
+    if (req.user) { // req.user contains dict of signed in user from db
+      // If the user is already logged in, redirect to the reminders page
+      return res.redirect('/reminders');
+    }
     res.render("auth/login"); // renders the login.ejs page
   },
 
   loginSubmit: (req, res, next) => {
-
     // Use the 'local strategy to authenticate the user located in /middleware/passport
     passport.authenticate('local', (err, user) => {
   

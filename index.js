@@ -67,8 +67,19 @@ app.post("/register", authController.registerSubmit);
 app.get("/login", authController.login);
 app.post("/login", authController.loginSubmit);
 
+// Logout Route 
+app.get("/logout", (req, res) => {
+  // when called, logs out the currently signed in user
+  req.logout((err) => {
+    err && next(err)     
+    // redirects to login page
+    res.redirect('/login');
+  });
+});
+
 app.listen(3001, function () {
   console.log(
     "Server running. Visit: localhost:3001/reminders in your browser 🚀"
   );
 });
+

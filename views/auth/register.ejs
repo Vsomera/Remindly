@@ -1,13 +1,72 @@
 <div class="container">
-  <form>
+  <form action="/register" method="POST">
     <div class="form-group">
+      <br/>
+      <h3 class="text-center">Register</h3>
       <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <input
+        name="email"
+        type="email"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        placeholder="Enter email"
+      />
+      <!-- Prompts error message if user enters an email that already exists in database -->
+      <% if (typeof emailError !== 'undefined') { %>
+        <div class="alert alert-danger">
+          <%= emailError %>
+        </div>
+      <% } %>
+      
+      <small id="emailHelp" class="form-text text-muted"
+        >We'll never share your email with anyone else.</small
+      >
+      <br>
+      <label for="exampleInputEmail1">Username</label>
+      <input
+        name="username"
+        type="username"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        placeholder="Enter Username"
+      />
+      <!-- Prompts error message if user enters an email that already exists in database -->
+      <% if (typeof nameError !== 'undefined') { %>
+        <div class="alert alert-danger">
+          <%= nameError %>
+        </div>
+      <% } %>
     </div>
+    <br/>
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <input
+        name="password"
+        type="password"
+        class="form-control"
+        id="exampleInputPassword1"
+        placeholder="Enter a Password"
+      />
+      <!-- Prompts error message if user enters an email that already exists in database -->
+      <% if (typeof passError !== 'undefined') { %>
+        <div class="alert alert-danger">
+          <%= passError %>
+        </div>
+      <% } %>
+      <br />
+      <label for="exampleInputPassword1">Confirm Password</label>
+      <input
+        name="confirmPassword"
+        type="password"
+        class="form-control"
+        id="exampleInputPassword2"
+        placeholder="Re-Enter your Password"
+      />
+      <small class="form-text text-muted"
+      >Already have an Account? <a href="/login">Log In</a></small
+    >
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

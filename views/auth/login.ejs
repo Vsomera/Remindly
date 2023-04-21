@@ -1,10 +1,11 @@
 <div class="container">
   <form action="/login" method="POST">
     <div class="form-group">
+      <br />
       <h3 class="text-center">Login</h3>
       <label for="exampleInputEmail1">Email address</label>
       <input
-        name = "email"
+        name="email"
         type="email"
         class="form-control"
         id="exampleInputEmail1"
@@ -18,12 +19,15 @@
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
       <input
-        name = "password"
+        name="password"
         type="password"
         class="form-control"
         id="exampleInputPassword1"
         placeholder="Password"
       />
+      <small class="form-text text-muted"
+        >Need an Account? <a href="/register">Sign up</a></small
+      >
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>

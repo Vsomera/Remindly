@@ -1,5 +1,6 @@
 const passport = require("../middleware/passport")
 const { userLogin } = require("../models/userModels")
+const { addUsertoDb } = require("../controller/user_controller")
 
 let authController = {
   login: (req, res) => {
@@ -77,9 +78,10 @@ let authController = {
       // if there are errors -> renders the register page with the error messages
       res.render('auth/register', errors);
     } else {
-      // success
-      console.log(req.body)
-      res.send('Success: Check Console');
+      // Push to database
+      addUsertoDb(req.body)
+      // redirect to login page
+      res.render('auth/login', {regComplete : "Registration Completed! Please Log In"});
     }
   },
 };

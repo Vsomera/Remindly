@@ -1,4 +1,5 @@
-const userModel = require("../models/userModels").userModel;
+const { userLogin, userModel } = require("../models/userModels")
+let database = require("../database")
 
 const getUserByEmailIdAndPassword = (email, password) => {
 
@@ -24,7 +25,26 @@ function isUserValid(user, password) {
   return user.password === password;
 }
 
+
+const addUsertoDb = (user) => {
+
+  // generates a unique id number and pushes to userLogin
+  const userId = Math.floor(Math.random() * 900000) + 100000
+  userLogin.push({
+    id : userId,
+    name : user.username,
+    email : user.email,
+    password: user.password,
+  })
+
+  // creates empty reminders array for the user in database.js
+  database[user.username] = {
+    reminders: []
+  }
+}
+
 module.exports = {
   getUserByEmailIdAndPassword,
   getUserById,
+  addUsertoDb,
 };

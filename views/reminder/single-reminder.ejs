@@ -1,11 +1,12 @@
 <div class="container">
-  <h1 class="page-header">Reminders</h1>
-
+  <br>
+  <h1 class="page-header">Reminder</h1>
+  <br>
     <ul class="list-group">
       <li class="list-group-item">
-        <h3><strong><%= reminderItem.title %>: </strong></h3>
-        <h4><%= reminderItem.description %></h4>
-        <h4>Completed:
+        <h3 class ="text-dark"><strong><%= reminderItem.title %>: </strong></h3>
+        <h4 class ="text-dark"><%= reminderItem.description %></h4>
+        <h4 class ="text-dark">Completed:
           <% if (reminderItem.completed == true) { %>
             <span class="label label-success">True</span>
           <% } else if (reminderItem.completed == false) { %>

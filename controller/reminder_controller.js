@@ -3,10 +3,10 @@ const { ensureAuthenticated } = require("../middleware/checkAuth")
 
 let remindersController = {
   list: [
-    ensureAuthenticated,
+    ensureAuthenticated, // ensures the user is logged in
     (req, res) => {
       const username = req.user.name
-      const userReminders = database[username].reminders
+      const userReminders = database[username].reminders // only shows reminders made by the user
       res.render("reminder/index", { reminders: userReminders });
     }
   ],

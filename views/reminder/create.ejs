@@ -1,13 +1,16 @@
 <div class="container">
   <form action="/reminder" method="POST">
+    <br>
+    <h1 class="page-header text-light">Create Reminder</h1>
     <div class="form-group">
+      <br>
       <label for="title">Title</label>
-      <input type="text" class="form-control" id="titleInput" placeholder="Title" name="title">
+      <input type="text" class="form-control" id="titleInput" placeholder="Enter a title for your reminder" name="title">
     </div>
     <div class="form-group">
       <label for="description">Description</label>
-      <textarea class="form-control" id="descriptionInput" rows="3" placeholder="Description" name="description"></textarea>
+      <textarea class="form-control" id="descriptionInput" rows="3" placeholder="Enter a description or date" name="description"></textarea>
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-secondary">Submit</button>
   </form>
 </div>

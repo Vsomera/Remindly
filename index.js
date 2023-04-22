@@ -5,6 +5,8 @@ const path = require("path");
 const ejsLayouts = require("express-ejs-layouts");
 const reminderController = require("./controller/reminder_controller");
 const authController = require("./controller/auth_controller");
+const port = process.env.PORT || 3001;
+
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
@@ -75,9 +77,9 @@ app.get("/logout", (req, res) => {
   });
 });
 
-app.listen(3001, function () {
+app.listen(port, function () {
   console.log(
-    "Server running. Visit: localhost:3001/reminders in your browser 🚀"
+    "Server running. Visit: localhost:" + port + "/reminders in your browser 🚀"
   );
 });
 
